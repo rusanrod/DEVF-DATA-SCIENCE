@@ -26,6 +26,12 @@ result = array.join('')                     //une todos los elementos de un arre
 result = array.fill(0,2,5)                  // llena con 0 desde la posicion 2 hasta la posicion 5-1
 result = array.fill(0,2)                    // llena con 0 desde la posicion 2 hasta el final
 result = array.fill(0)                      // llena con 0 todo el arreglo
+result = array.slice(2,6)                   //retorna una parte del arreglo original desde 2 hasta 6-1
+result = array.splice(2,4)                  //elimina de un array desde la posicion 2 el numero de elementos y regresa los elementos eliminados
+result = array.splice(2,4,'a','b')          //elimina de un array desde la posicion 2 el numero de elementos, modifica el arreglo original y regresa los elementos eliminados
+result = array.reverse()                    //regresa un arreglo con elementos invertidos
+result = array.sort()                       //ordena en orde ascendente
+
 
 
 //todos estos van con arrow function 
@@ -36,3 +42,6 @@ result = array.find(el => el ===2)          //regresa el primer elemento que cum
 result = array.every(el => el > 2)          //revisa si todos los elementos de un arreglo que cumple una condicion 
 result = array.some(el => el > 2)           //revisa si al menos algun elemento del arreglo cumple una condicion
 result = array.reduce((acc, el)=> acc + el,0)   //reduce todo el arreglo a un solo valor dependiendo de la operacion
+result = array.sort((a,b)=>a-b)             //hace una comparacion, si retorna algo menor a 0 a se pone antes que b
+result = array.sort((a,b)=>b-a)             //si retorna algo mayor a 0 b se pone antes de a
+                                            //si retorna 0 no se hace nada
