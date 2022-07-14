@@ -57,7 +57,7 @@ class LinkedList{
         }
     }
     isEmpty(){
-        return this.head===null
+        return this.currentSize===0
     }
     clear(){
         this.head = null
