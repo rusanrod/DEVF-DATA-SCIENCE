@@ -47,10 +47,11 @@ class BinarySearchTree{
         if(node===null){
             return null
         } else if(key < node.data){
-            node.left = this.remove(this.left, key)
+            node.left = this.removeNode(this.left, key)
             return node
         } else if(key > node.data ){
             node.right = this.removeNode(node.right, key)
+            return node
         } else{
             if(node.left === null && node.right===null){
                 node = null
@@ -65,6 +66,8 @@ class BinarySearchTree{
 
             let aux = this.findMinNode(node.right)
             node.data =aux.data
+
+            node.right = this.removeNode(node.right,aux.data)
             return node
 
         }
@@ -84,7 +87,42 @@ class BinarySearchTree{
     getRootNode(){
         return this.root
     }
-    // In orden
-    // Post orden
+    
     // Search
+    search(node, data){
+        if(node===null){
+            return null
+        } else if(data< node.data){
+            return this.search(node.left,data)
+        } else if(data > node.data){
+            return this.search(node.right,data)
+        }else{
+            return node
+        }
+    }
+    //Pre orden
+    preOrder(node){
+        if(node!==null){
+            console.log(node.data)
+            this.preOrder(node.left)
+            this.preOrder(node.right)
+        }  
+    }  
+    // In orden
+    inOrder(node){
+        if(node!==null){
+            this.inOrder(node.left)
+            console.log(node.data)
+            this.inOrder(node.right)
+        }
+    }
+    
+    // Post orden
+    postOrder(node){
+        if(node!==null){
+            this.postOrder(node.left)
+            this.postOrder(node.right)
+            console.log(node.data)
+        }
+    }
 }
