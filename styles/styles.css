@@ -1,0 +1,94 @@
+
+.sections{
+    margin-top: 70px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 40px ;
+}
+
+section{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.section-title{
+    color:rgba(255, 255, 255, 0.904);
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+.section-title:hover{
+    color:white;
+
+}
+.icono{
+    width: 50px;
+    height: 50px;
+}
+.movies{
+    display: flex;
+    flex-flow: row nowrap;
+    /* flex-shrink: 0; */
+    /* justify-content: space-between; */
+    justify-content: flex-start;
+    gap: 7px;
+    overflow-x: scroll;
+}
+.movies::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;               /* width of the entire scrollbar */
+  }
+  .movies::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+  .movies::-webkit-scrollbar-thumb {
+    background-color: white;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #212529;
+  }
+.movies:hover{
+    opacity: 0.95;
+}
+
+.movie{
+    transition: transform 500ms;
+    flex-shrink: 0;
+    border-radius: 5px;
+    height: 7.5rem;
+    width: 13rem;
+    overflow: hidden;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+/* .movies:focus-within .movie,
+.movies:hover .movie {
+  transform: translateX(-25%);
+}
+
+.movie:focus ~ .movie,
+.movie:hover ~ .movie {
+  transform: translateX(25%);
+}
+
+.movies .movie:focus,
+.movies .movie:hover {
+  transform: scale(1.3);
+  z-index: 1;
+} */
+
+
+.movie img{
+    width: 100%;
+    height: auto;
+}
+
+/* @supports(object-fit: cover){
+    .box img{
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+} */
+/* .debug{
+    border: 1px solid white;
+} */
