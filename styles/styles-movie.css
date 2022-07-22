@@ -1,0 +1,16 @@
+.card-info{
+    /* position: absolute; */
+    margin-top: 70px;
+}
+.card-title{
+    font-size: 2rem;
+    color: white;
+}
+.movie-image{
+    width: 250px;
+    height: 500px;
+}
+.movie-image img{
+    width: 100%;
+    height: auto;
+}
