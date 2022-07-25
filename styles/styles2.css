@@ -5,7 +5,6 @@
     flex-flow: column nowrap;
     gap: 40px ;
 }
-
 .section{
     display: flex;
     flex-flow: column nowrap;
@@ -19,53 +18,44 @@
     color:white;
 
 }
-/* Modificar todo lo que se deba */
-/* .section-body{
+.section-body{
+    align-items: center;
     height: 10rem;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 7px;
-    overflow-x: scroll;
-    pointer-events: none;
-    position: relative;
 }
-.section-body > .movie{
-    pointer-events: auto;
-} */
+.carrusel{
+    align-items: center;
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 8px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
 /* Animacion de zoom y desplazamiento de las peliculas de los lados */
-/* .section-body:hover > .movie:not(:hover):not(:hover ~ .movie){
+.carrusel:hover > .movie:not(:hover):not(:hover ~ .movie){
     transition: all 0.5s ease-in-out;
-    transform: translateX(-10%);
+    transform: translateX(-8%);
 }
 .movie:focus ~ .movie,
 .movie:hover ~ .movie {
   transition: all 0.5s ease-in-out;
-  transform: translateX(10%);
-} */
-/* .carrusel{
-    display: flex;
-    flex-flow: row nowrap;
-} */
-/* scroll-bar */
-/* .section-body::-webkit-scrollbar {
-    width: 5px;
-    height: 10px;               
-  }
-  .section-body::-webkit-scrollbar-track {
-    background: transparent;      
-  }
-  .section-body::-webkit-scrollbar-thumb {
-    background-color: white;    
-    background-color: transparent;
-    border-radius: 20px;       
-    border: 3px solid #212529;
-  } */
-/* Efecto de aparición del nombre  */
-.section-body:hover{
-    opacity: 0.90;
-    pointer-events: none;
+  transform: translateX(8%);
+}
+.button{
+    background-color: rgba(90, 90, 90, 0.274);
+    border: transparent;
+    color: rgb(255, 255, 255);
+    height: 85%;
+    width: 30px;
+    align-content: center;
+}
+
+.button:hover{
+    background-color: rgba(90,90,90,0.8);
 }
 
 .movie{
@@ -122,4 +112,3 @@
 .movie:hover{
     transform: scale(1.1);
 }
-
