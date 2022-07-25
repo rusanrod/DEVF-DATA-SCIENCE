@@ -6,7 +6,7 @@
     gap: 40px ;
 }
 
-section{
+.section{
     display: flex;
     flex-flow: column nowrap;
 }
@@ -19,16 +19,10 @@ section{
     color:white;
 
 }
-.icono{
-    width: 50px;
-    height: 50px;
-}
 .section-body{
     height: 10rem;
     display: flex;
     flex-flow: row nowrap;
-    /* flex-shrink: 0; */
-    /* justify-content: space-between; */
     justify-content: flex-start;
     align-items: center;
     gap: 7px;
@@ -51,19 +45,20 @@ section{
 }
 .section-body::-webkit-scrollbar {
     width: 5px;
-    height: 10px;               /* width of the entire scrollbar */
+    height: 10px;               
   }
   .section-body::-webkit-scrollbar-track {
-    background: transparent;        /* color of the tracking area */
+    background: transparent;      
   }
   .section-body::-webkit-scrollbar-thumb {
-    background-color: white;    /* color of the scroll thumb */
+    background-color: white;    
     background-color: transparent;
-    border-radius: 20px;       /* roundness of the scroll thumb */
+    border-radius: 20px;       
     border: 3px solid #212529;
   }
+
 .section-body:hover{
-    opacity: 0.95;
+    opacity: 0.90;
     pointer-events: none;
 }
 
