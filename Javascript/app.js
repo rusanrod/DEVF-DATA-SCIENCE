@@ -1,5 +1,5 @@
 // Constantes para uso de la API
-const API_KEY = 'e201daf14865dbe6d032b966f258ec41'
+const API_KEY = 'api_key=e201daf14865dbe6d032b966f258ec41'
 const BASE_URL = 'https://api.themoviedb.org/3'
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original'
 const LAN = 'language=en-US'
@@ -34,9 +34,9 @@ function scrollBtns(){
 // Métodos de llenado de secciones
 
 document.addEventListener('DOMContentLoaded', () => {
-    let secciones = ['New Releases', 'Action', 'Fantasy', 'Romance', 'Sci-Fi', 'Terror', 'Adventures', 'Drama', 'Documental']
+    let secciones = ['New-Releases', 'Action', 'Fantasy', 'Romance', 'Sci-Fi', 'Terror', 'Adventures', 'Drama', 'Documental']
     // addSection('Estrenos')
-    let estrenos = `${BASE_URL}/discover/movie?api_key=${API_KEY}&${LAN}&year=2022&page=1`
+    let estrenos = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&year=2022&page=1`
     // let genero = `${BASE_URL}/discover/movie?api_key=${API_KEY}&${LAN}&page=5&with_genres=`
     // Aqui comienza la iteracion
     for(let j = 0; j < secciones.length; j++){
@@ -70,9 +70,10 @@ function addSection(sectionName){
     const section = document.createElement('div')
     section.classList.add("section")
     section.id = sectionName
+    let title = sectionName.replace(/-/g, ' ')
     section.innerHTML = `
     <div class="section-head text-white">
-      <a class="section-title" href="#">${sectionName}</a>
+      <a class="section-title" href="#">${title}</a>
     </div>
     <div class="section-body py-2 px-2">
       <button class="button left-btn" role="button">
@@ -93,12 +94,12 @@ function addSection(sectionName){
 }
 
 function addMovie(pelicula,sectionID){
-    console.log(pelicula)
+    // console.log(pelicula)
     let movieID = pelicula.id
     let movieName = pelicula.original_title
     let movieIMG = BASE_IMG_URL + pelicula.poster_path
     let movieYear = pelicula.release_date.slice(0,4)
-    console.log(movieYear)
+    // console.log(movieYear)
     const movie = document.createElement('div')
     const father = document.querySelector(`#${sectionID}-c`)
     movie.classList.add('movie')
@@ -111,10 +112,12 @@ function addMovie(pelicula,sectionID){
     `
     father.appendChild(movie)
 }
+
+// Métodos GET 
 async function getMovie(movieID){
 
     try{
-        let pelicula = await axios.get(`${BASE_URL}/movie/${movieID}?api_key=${API_KEY}`)
+        let pelicula = await axios.get(`${BASE_URL}/movie/${movieID}?${API_KEY}`)
         return pelicula.data
     } catch(error){
         console.log('Tu error: ',error)
