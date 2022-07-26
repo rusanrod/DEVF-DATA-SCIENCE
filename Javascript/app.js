@@ -1,27 +1,52 @@
-const API_KEY='e201daf14865dbe6d032b966f258ec41'
-const BASE_URL='https://api.themoviedb.org/3'
+const API_KEY = 'e201daf14865dbe6d032b966f258ec41'
+const BASE_URL = 'https://api.themoviedb.org/3'
+const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original'
+const LAN = 'language=en-US'
 
 
 const sections = document.querySelector('.sections')
-const scroll = document.querySelector('.carrusel')
+let scrolls// = document.querySelector('.carrusel')
+let rightBtns
+let leftBtns
 
-const rightBtn = document.querySelector('.right-btn')
-const leftBtn = document.querySelector('.left-btn')
 
 // Métodos básicos de funcionamiento del proyecto
-rightBtn.addEventListener('click', () => {
-    scroll.scrollLeft += scroll.offsetWidth
-})
+function scrollBtns(){
+    rightBtns = document.querySelectorAll('.right-btn')
+    leftBtns = document.querySelectorAll('.left-btn')
+    scrolls = document.querySelectorAll('.carrusel')
+    for(let i = 0; i < rightBtns.length; i++){
+        console.log(rightBtns[i])
+        rightBtns[i].addEventListener('click', () => {
+            scrolls[i].scrollLeft += scrolls[i].offsetWidth
+        })
+    
+        leftBtns[i].addEventListener('click', () => {
+            scrolls[i].scrollLeft -= scrolls[i].offsetWidth
+        })
+    }
+}
 
-leftBtn.addEventListener('click', () => {
-    scroll.scrollLeft -= scroll.offsetWidth
-})
+
+
 
 // Métodos de llenado de secciones
 
 document.addEventListener('DOMContentLoaded', () => {
-    addSection('Suspenso')
-    console.log(getMovie(501))
+    addSection('Estrenos')
+    scrollBtns()
+    let pelisIDs = []
+        let pelicula = getNewReleases().then((response)=>{
+            // console.log('respuesta de axios: ', response)
+            // console.log(response)
+            let i = 0
+            while(pelisIDs.length>=15){
+                pelisIDs.push(response[i].id)
+                i++
+            }
+            // addMovie(response, 'Estrenos')
+        })
+    // console.log(addMovie(getMovie(550)),'Suspenso')
     // addMovie(501,'Suspenso')
     // addSection('Fantasía')
 })
@@ -52,26 +77,40 @@ function addSection(sectionName){
     sections.appendChild(section)
 }
 
-function addMovie(movieID,sectionID){
+function addMovie(pelicula,sectionID){
+    // console.log(pelicula.data)
+    let movieID = pelicula.id
+    let movieName = pelicula.original_title
+    let movieIMG = BASE_IMG_URL + pelicula.poster_path
+    let movieYear = pelicula.release_date.slice(0,4)
+    console.log(movieYear)
     const movie = document.createElement('div')
     const father = document.querySelector(`#${sectionID}-c`)
     movie.classList.add('movie')
     movie.id = movieID
-    // movie.innerHTML = `
-    //     <img class="content-img" src=${movieIMG} alt=${movieAlt}>
-    //     <div class="content-name">
-    //         ${movieName} (${movieYear})
-    //     </div>
-    // `
+    movie.innerHTML = `
+        <img class="content-img" src=${movieIMG} alt="">
+        <div class="content-name">
+            ${movieName} (${movieYear})
+        </div>
+    `
     father.appendChild(movie)
 }
-function getMovie(movieID){
-    let peliculas = 
-    axios.get(`${BASE_URL}/movie/${movieID}?api_key=${API_KEY}`)
-    .then((response)=>{
-        return response
-    })
-    .catch((error)=>{
-        console.log(error)
-    })
+async function getMovie(movieID){
+
+    try{
+        let pelicula = await axios.get(`${BASE_URL}/movie/${movieID}?api_key=${API_KEY}`)
+        return pelicula.data
+    } catch(error){
+        console.log('Tu error: ',error)
+    }
+}
+
+async function getNewReleases(){
+    try{
+        let peliculas = await axios.get(`${BASE_URL}/discover/movie?api_key=${API_KEY}&${LAN}&year=2022&page=1`)
+        return peliculas.data.results
+    } catch(error){
+        console.log('Tu error: ',error)
+    }
 }
