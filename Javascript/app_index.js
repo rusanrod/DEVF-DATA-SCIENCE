@@ -25,19 +25,20 @@ function scrollBtns(){
 // Métodos de llenado de secciones
 
 document.addEventListener('DOMContentLoaded', () => {
-    let secciones = ['New-Releases', 'Action', 'Fantasy', 'Romance', 'Sci-Fi', 'Terror', 'Adventures', 'Drama', 'Documental']
+    let secciones = ['New-Releases', 'Action', 'Fantasy', 'Romance', 'Family', 'Horror', 'Adventure', 'Drama', 'Documentary']
+    let genreIDs = [0,28,14,10749,10751,27,12,18,99]
     let estrenos = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&year=2022&page=1`
-    // let genero = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&page=5&with_genres=`
+    let genero = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&page=5&with_genres=`
     // Aqui comienza la iteracion
     for(let j = 0; j < secciones.length; j++){
         let pelisIDs = []
         let genre = ""
         addSection(secciones[j])
-        // if(j==0){
+        if(j==0){
             genre = estrenos
-        // }else{
-            // genre = genero + secciones[j]
-        // }
+        }else{
+            genre = genero + genreIDs[j]
+        }
         getNewReleases(genre).then((response) => {
             response.forEach(el => {
                 pelisIDs.push(el.id)
@@ -98,5 +99,3 @@ function addMovie(pelicula,sectionID){
     `
     father.appendChild(movie)
 }
-
-
