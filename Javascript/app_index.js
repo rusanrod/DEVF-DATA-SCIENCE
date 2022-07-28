@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .finally(() => {
             for(let i = 0; i < 15; i++){
-                getMovie(pelisIDs[i]).then((response) => {
+                getMovie(pelisIDs[i],0).then((response) => {
                     addMovie(response, secciones[j])
                 })
             } 
@@ -100,8 +100,6 @@ function addMovie(pelicula,sectionID){
 }
 
 function openMovie(id){
-    // id_movie = id
-    window.location.href = "./movie.html"
     addID2LS(id)
-    // console.log("hola"+ id)
+    window.location.href = "./movie.html"
 }

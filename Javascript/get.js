@@ -15,11 +15,20 @@ function readIDFromLS(){
     id_movie = JSON.parse(localStorage.getItem('id_movie'))
 }
 
-// Métodos GET 
-async function getMovie(movieID){
+function addActor2LS(dato){
+    localStorage.setItem('id_actor', JSON.stringify(dato))
+}
 
+function readActorFromLS(){
+    id_movie = JSON.parse(localStorage.getItem('id_actor'))
+}
+
+// Métodos GET 
+async function getMovie(movieID, option){
+    let url = ""
+    option === 0 ? url = `${BASE_URL}/movie/${movieID}?${API_KEY}` : url = `${BASE_URL}/movie/${movieID}/credits?${API_KEY}`
     try{
-        let pelicula = await axios.get(`${BASE_URL}/movie/${movieID}?${API_KEY}`)
+        let pelicula = await axios.get(url)
         return pelicula.data
     } catch(error){
         console.log('Tu error: ',error)

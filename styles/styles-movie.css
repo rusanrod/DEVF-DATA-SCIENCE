@@ -23,3 +23,8 @@
     width: auto;
     height: 100%;
 }
+.actor-link{
+    cursor: pointer;
+    /* text-decoration: underline; */
+    color: rgb(50, 91, 182);
+}

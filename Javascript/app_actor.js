@@ -1,10 +1,9 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     // let secciones = ['New-Releases', 'Action', 'Fantasy', 'Romance', 'Sci-Fi', 'Terror', 'Adventures', 'Drama', 'Documental']
     // let estrenos = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&year=2022&page=1`
     // let genero = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&page=5&with_genres=`
     // Aqui comienza la iteracion
-    readIDFromLS()
+    readActorFromLS()
 
     getMovie(id_movie,0).then((response) => {
         showMovie(response)
