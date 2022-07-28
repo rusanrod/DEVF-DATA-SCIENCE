@@ -1,14 +1,8 @@
-// Constantes para uso de la API
-const API_KEY = 'api_key=e201daf14865dbe6d032b966f258ec41'
-const BASE_URL = 'https://api.themoviedb.org/3'
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original'
-const LAN = 'language=en-US'
-
-
 const sections = document.querySelector('.sections')
 let scrolls     //arreglo para poner todos los carruseles del DOM
 let rightBtns   //arreglo para poner todos los botones derechos de los carruseles de DOM
 let leftBtns    //arreglo para poner todos los botones izquierdos de los carruseles del DOM
+let movie_sqr   //arreglo para poner todos los cuadros de peliculas
 
 
 // Métodos básicos de funcionamiento del proyecto
@@ -28,16 +22,12 @@ function scrollBtns(){
     }
 }
 
-
-
-
 // Métodos de llenado de secciones
 
 document.addEventListener('DOMContentLoaded', () => {
     let secciones = ['New-Releases', 'Action', 'Fantasy', 'Romance', 'Sci-Fi', 'Terror', 'Adventures', 'Drama', 'Documental']
-    // addSection('Estrenos')
     let estrenos = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&year=2022&page=1`
-    // let genero = `${BASE_URL}/discover/movie?api_key=${API_KEY}&${LAN}&page=5&with_genres=`
+    // let genero = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&page=5&with_genres=`
     // Aqui comienza la iteracion
     for(let j = 0; j < secciones.length; j++){
         let pelisIDs = []
@@ -48,9 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // }else{
             // genre = genero + secciones[j]
         // }
-        console.log(genre)
         getNewReleases(genre).then((response) => {
-            console.log(pelisIDs)
             response.forEach(el => {
                 pelisIDs.push(el.id)
             })
@@ -60,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 getMovie(pelisIDs[i]).then((response) => {
                     addMovie(response, secciones[j])
                 })
-            }
+            } 
         })
     }
     scrollBtns()
@@ -94,42 +82,26 @@ function addSection(sectionName){
 }
 
 function addMovie(pelicula,sectionID){
-    // console.log(pelicula)
     let movieID = pelicula.id
     let movieName = pelicula.original_title
     let movieIMG = BASE_IMG_URL + pelicula.poster_path
     let movieYear = pelicula.release_date.slice(0,4)
-    // console.log(movieYear)
     const movie = document.createElement('div')
     const father = document.querySelector(`#${sectionID}-c`)
     movie.classList.add('movie')
     movie.id = movieID
     movie.innerHTML = `
         <img class="content-img" src=${movieIMG} alt="">
-        <div class="content-name">
+        <div class="content-name" id=${movieID} onclick="openMovie(this.id)">
             ${movieName} (${movieYear})
         </div>
     `
     father.appendChild(movie)
 }
 
-// Métodos GET 
-async function getMovie(movieID){
-
-    try{
-        let pelicula = await axios.get(`${BASE_URL}/movie/${movieID}?${API_KEY}`)
-        return pelicula.data
-    } catch(error){
-        console.log('Tu error: ',error)
-    }
-}
-
-async function getNewReleases(path){
-    try{
-        // let peliculas = await axios.get()
-        let peliculas = await axios.get(path)
-        return peliculas.data.results
-    } catch(error){
-        console.log('Tu error: ',error)
-    }
+function openMovie(id){
+    // id_movie = id
+    window.location.href = "./movie.html"
+    addID2LS(id)
+    // console.log("hola"+ id)
 }
