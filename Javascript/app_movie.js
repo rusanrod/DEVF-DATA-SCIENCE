@@ -58,6 +58,7 @@ function showCast(cast){
 function openActor(id){
     const actor = document.getElementById(id)
     let name = actor.innerText.replace(", ","")
+    name = name.replace(/ /g,'+')
     addActor2LS(name)
     window.location.href = "./actor.html"
 }

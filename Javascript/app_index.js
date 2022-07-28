@@ -99,7 +99,4 @@ function addMovie(pelicula,sectionID){
     father.appendChild(movie)
 }
 
-function openMovie(id){
-    addID2LS(id)
-    window.location.href = "./movie.html"
-}
+

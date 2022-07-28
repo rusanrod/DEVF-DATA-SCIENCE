@@ -20,7 +20,12 @@ function addActor2LS(dato){
 }
 
 function readActorFromLS(){
-    id_movie = JSON.parse(localStorage.getItem('id_actor'))
+    actor_name = JSON.parse(localStorage.getItem('id_actor'))
+}
+
+function openMovie(id){
+    addID2LS(id)
+    window.location.href = "./movie.html"
 }
 
 // Métodos GET 
@@ -41,6 +46,15 @@ async function getNewReleases(path){
         let peliculas = await axios.get(path)
         return peliculas.data.results
     } catch(error){
+        console.log('Tu error: ',error)
+    }
+}
+
+async function getActorMovies(name){
+    try{
+        let peliculas = await axios.get(`${BASE_URL}/search/person?${API_KEY}&query=${name}`)
+        return peliculas.data.results[0].known_for
+    }catch(error){
         console.log('Tu error: ',error)
     }
 }
