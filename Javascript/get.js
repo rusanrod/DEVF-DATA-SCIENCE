@@ -47,7 +47,7 @@ formulario.addEventListener('submit',(e)=>{
     e.preventDefault()
     // console.log(barra_busqueda.value)
     addMovieName2LS(barra_busqueda.value)
-    window.location.href = "./movie.html"
+    window.location.href = "./search.html"
 })
 // Métodos GET 
 async function getMovie(movieID, option){
@@ -75,6 +75,15 @@ async function getActorMovies(name){
     try{
         let peliculas = await axios.get(`${BASE_URL}/search/person?${API_KEY}&query=${name}`)
         return peliculas.data.results[0].known_for
+    }catch(error){
+        console.log('Tu error: ',error)
+    }
+}
+
+async function searchMovies(name){
+    try{
+        let peliculas = await axios.get(`${BASE_URL}/search/movie?${API_KEY}&query=${name}`)
+        return peliculas.data.results
     }catch(error){
         console.log('Tu error: ',error)
     }

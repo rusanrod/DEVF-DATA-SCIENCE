@@ -1,36 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Aqui comienza la iteracion
-    readActorFromLS()
-    actorPage(actor_name)
-    getActorMovies(actor_name).then((response) =>{
+    readMovieNameFromLS()
+    searchPage(movie_name)
+    searchMovies(movie_name).then((response) =>{
         response.forEach(el => {
-            showActor(el)
+            showSearch(el)
         });
+        // console.log(response)
     })
 })
-function actorPage(actor_name){
+function searchPage(actor_name){
     let name = actor_name.replace("+"," ")
     const movie = document.createElement('div')
     const father = document.querySelector(`main`)
-    movie.classList.add('actor-info')
+    movie.classList.add('movie-search')
     movie.classList.add('mx-5')
     // movie.id = movieID
     movie.innerHTML = `
-    <div class="actor-name">${name}</div>
-    <div class="actor-movies">
+    <div class="search">${name}</div>
+    <div class="movies">
       
     </div>
     `
     father.appendChild(movie)
 }
 
-function showActor(pelicula){
+function showSearch(pelicula){
     let movieName = pelicula.original_title
     let movieIMG = BASE_IMG_URL + pelicula.poster_path
     let movieYear = pelicula.release_date.slice(0,4)
 
     const movie = document.createElement('div')
-    const father = document.querySelector(`.actor-movies`)
+    const father = document.querySelector(`.movies`)
     movie.classList.add('single-movie')
     movie.classList.add('my-3')
     movie.innerHTML = `
