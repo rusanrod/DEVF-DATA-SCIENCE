@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let estrenos = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&year=2022&page=1`
     let genero = `${BASE_URL}/discover/movie?${API_KEY}&${LAN}&page=5&with_genres=`
     // Aqui comienza la iteracion
-    for(let j = 0; j < secciones.length; j++){
+    for(let j = 0; j < secciones.length-2; j++){
         let pelisIDs = []
         let genre = ""
         addSection(secciones[j])
@@ -99,3 +99,4 @@ function addMovie(pelicula,sectionID){
     `
     father.appendChild(movie)
 }
+

@@ -4,9 +4,14 @@ const BASE_URL = 'https://api.themoviedb.org/3'
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/original'
 const LAN = 'language=en-US'
 
+const formulario = document.querySelector('form')
+const barra_busqueda = document.querySelector('input')
 //variables de transicion entre paginas
 let id_movie = 0
+let movie_name = ""
 let actor_name = ""
+
+//movie ID get and set
 function addID2LS(dato){
     localStorage.setItem('id_movie', JSON.stringify(dato))
 }
@@ -15,6 +20,7 @@ function readIDFromLS(){
     id_movie = JSON.parse(localStorage.getItem('id_movie'))
 }
 
+//actor name get and set
 function addActor2LS(dato){
     localStorage.setItem('id_actor', JSON.stringify(dato))
 }
@@ -23,11 +29,26 @@ function readActorFromLS(){
     actor_name = JSON.parse(localStorage.getItem('id_actor'))
 }
 
+// movie name get and set
+function addMovieName2LS(dato){
+    localStorage.setItem('movie_name', JSON.stringify(dato))
+}
+
+function readMovieNameFromLS(){
+    movie_name = JSON.parse(localStorage.getItem('movie_name'))
+}
+
 function openMovie(id){
     addID2LS(id)
     window.location.href = "./movie.html"
 }
 
+formulario.addEventListener('submit',(e)=>{
+    e.preventDefault()
+    // console.log(barra_busqueda.value)
+    addMovieName2LS(barra_busqueda.value)
+    window.location.href = "./movie.html"
+})
 // Métodos GET 
 async function getMovie(movieID, option){
     let url = ""
